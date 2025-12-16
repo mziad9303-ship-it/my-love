@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ذكرياتنا</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to bottom, #ffe6f2, #ffcce6);
+  color: white;
+  text-align: center;
+  overflow-x: hidden;
+}
+
+#lock {
+  position: fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background: linear-gradient(to bottom, #ffe6f2, #ffcce6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.lock-box {
+  background: rgba(255,255,255,0.25);
+  padding: 25px;
+  border-radius: 20px;
+  width: 80%;
+  max-width: 300px;
+}
+
+.lock-box input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  margin-top: 15px;
+  font-size: 16px;
+  text-align: center;
+}
+
+.lock-box button {
+  margin-top: 15px;
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  background: #ff66b3;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+h1 { margin-top: 25px; font-size: 24px; }
+
+.message {
+  background: rgba(255,255,255,0.2);
+  margin: 15px;
+  padding: 15px;
+  border-radius: 15px;
+  font-size: 15px;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  padding: 15px;
+}
+
+.gallery img {
+  width: 100%;
+  border-radius: 18px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+  cursor: pointer;
+}
+
+.fullscreen {
+  position: fixed;
+  top:0; left:0;
+  width:100%;
+  height:100%;
+  background: rgba(0,0,0,0.9);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.fullscreen img {
+  max-width: 95%;
+  max-height: 95%;
+  border-radius: 15px;
+}
+
+.heart {
+  position: fixed;
+  color: pink;
+  animation: float 4s linear infinite;
+  opacity: 0.8;
+}
+
+@keyframes float {
+  0% { transform: translateY(100vh); opacity: 1; }
+  100% { transform: translateY(-10vh); opacity: 0; }
+}
+
+footer { margin: 20px 0; font-size: 13px; opacity: 0.9; }
+</style>
+</head>
+
+<body>
+
+<div id="lock">
+  <div class="lock-box">
+    <h2>🔒 سر الحب</h2>
+    <p>ادخل الباسورد</p>
+    <input type="password" id="pass">
+    <button onclick="checkPass()">دخول 💖</button>
+  </div>
+</div>
+
+<h1>💗 ذكرياتنا</h1>
+
+<div class="message">
+  كل صورة هنا شاهدة على حبنا  
+  وضحكتنا اللي عمرها ما هتنتهي ❤️
+</div>
+
+<div class="gallery">
+  <img src="1.jpg" onclick="openImg(this.src)">
+  <img src="2.jpg" onclick="openImg(this.src)">
+  <img src="3.jpg" onclick="openImg(this.src)">
+  <img src="4.jpg" onclick="openImg(this.src)">
+  <img src="5.jpg" onclick="openImg(this.src)">
+  <img src="6.jpg" onclick="openImg(this.src)">
+  <img src="7.jpg" onclick="openImg(this.src)">
+  <img src="8.jpg" onclick="openImg(this.src)">
+</div>
+
+<footer>
+  💕 بحبك أكتر من أي كلام
+</footer>
+
+<div class="fullscreen" onclick="closeImg()">
+  <img id="fullImg">
+</div>
+
+<audio id="music" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+function checkPass() {
+  const p = document.getElementById("pass").value;
+  if (p === "ziad love sama") { // الباسورد الجديد
+    document.getElementById("lock").style.display = "none";
+    document.getElementById("music").play();
+  } else {
+    alert("الباسورد غلط 💔");
+  }
+}
+
+function openImg(src) {
+  document.getElementById("fullImg").src = src;
+  document.querySelector(".fullscreen").style.display = "flex";
+}
+
+function closeImg() {
+  document.querySelector(".fullscreen").style.display = "none";
+}
+
+setInterval(() => {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "💖";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = (15 + Math.random() * 20) + "px";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 4000);
+}, 500);
+</script>
+
+</body>
+</html>
